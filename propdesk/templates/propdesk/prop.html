@@ -1,0 +1,102 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waynes Wild Web</title>
+    <script src="https://use.fontawesome.com/bccccab0e8.js"></script>
+    <link rel="stylesheet" href="{% static 'propdesk/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'propdesk/style.css' %}" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'propdesk/jquery-3.1.0.min.js' %}"></script>
+    <script src="{% static 'propdesk/site.js' %}"></script>
+</head>
+<body>
+{% include 'propdesk/nav.html' %}
+<div class="container-fluid">
+    <h1>{{property.prop_name}}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Property Information</div>
+                        <div class="panel-body propbody">
+                            <p>Square Feet: {{property.property_sf}}</p>
+                            <p>Ownership: </p>
+                            <h4>Address</h4>
+                            <p> {{property.property_address}}</p>
+                            <p> {{property.property_city}}, {{property.property_state}} {{property.property_zip}}</p>
+                            <p> Todo: Create extended info list</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Tenants</div>
+                        <div class="panel-body">
+                            <button class="btn btn-info">Send Tenant Bulletin</button>
+                            <ul class="list-group">
+                            {% for tenant in property.tenant_set.all %}
+                                <li class="list-group-item mainlist">
+                                    <h3>{{tenant.tenant_name}}</h3>
+                                    <ul class="list-group">
+                                        <li class="list-group-item"> <p>Emergency Contanct: {{tenant.tenant_emergency_name}}</p><p> Phone: {{tenant.tenant_emergency_phone}}</p> <p>Email: {{tenant.tenant_emergency_email}}</p></li>
+                                        <li class="list-group-item"> <p>Site Contanct: {{tenant.tenant_site_name}}</p><p> Phone: {{tenant.tenant_site_phone}}</p><p> Email: {{tenant.tenant_site_email}}</p></li>
+                                    </ul>
+                                    <button class="btn btn-success">Generate AAR</button><button class="btn btn-success">Generate Late Fee</button><button class="btn btn-success">Generate Invoice</button>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                            <a href="{% url 'propdesk:tenant_new' %}" class="top-menu"><i class="fa fa-plus-square" aria-hidden="true"></i> New Tenant</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">On-going Projects</div>
+                        <div class="panel-body">
+                            <p> Projects will essentially be context specific "To Do" lists associated with property management.  It will include checkboxes like "Contract created", "Contract executed", "Invoice Paid", "CM Fee generated" </p>
+                            <p> Projects will archive when complete and fall off this list.</p>
+
+                            <ul class="list-group">
+                            {% for project in property.project_set.all %}
+                                <li class="list-group-item mainlist"> <strong>{{project.name}}</strong> <br> Type: {{project.type}} <br> Start-date: {{project.startdate}}</li>
+
+                                {% endfor %}
+                            </ul>
+                            <a href="{% url 'propdesk:project_new' %}" class="top-menu"><i class="fa fa-plus-square" aria-hidden="true"></i> New Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Vendors</div>
+                        <div class="panel-body">
+                            <button class="btn btn-info">View all Property contracts</button>
+                            <ul class="list-group">
+                                {% for vendor in property.vendor_set.all %}
+                                    <li class="list-group-item mainlist">
+                                        <h3>{{vendor.vendor_name}}</h3>
+                                        <ul class="list-group">
+                                            <li class="list-group-item"> Vendor Contanct: {{vendor.vendor_contact}}, Phone: {{vendor.vendor_phone}}, Email: {{vendor.vendor_email}}</li>
+                                        </ul>
+                                        <button class="btn btn-success">Generate Contract</button>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <a href="{% url 'propdesk:vendor_new' %}" class="top-menu"><i class="fa fa-plus-square" aria-hidden="true"></i> New Vendor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waynes Wild Web</title>
+    <link rel="stylesheet" href="{% static 'propdesk/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'propdesk/style.css' %}" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'propdesk/jquery-3.1.0.min.js' %}"></script>
+    <script src="{% static 'propdesk/site.js' %}"></script>
+</head>
+<body>
+  {% include 'propdesk/nav.html' %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Portfolios</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {% for city in all_cities %}
+                        <li class="list-group-item">
+                            <h3>{{ city.city_name }}</h3>
+                            <div class="list-group">
+                                {% for a in city.portfolio_set.all %}
+                                 <a class="list-group-item listitem mainlist"href="{% url 'propdesk:portview' a.id %}">  {{a.portfolio_name}} </a>
+                                {% endfor %}
+                            </div>
+
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Statistics</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {% for city in all_cities %}
+                        <li class="list-group-item mainlist">
+                            <h3>{{ city.city_name }}</h3>
+                            <p> Maybe # of properties?</p>
+                            <p> Maybe % of each property type?</p>
+                            <p>Total square footage?</p>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                    <h2>Search Properties</h2>
+                        <form action="{% url 'propdesk:search' %}" method="get">
+                            <input type="text" name="q">
+                            <input type="submit" value="Search">
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

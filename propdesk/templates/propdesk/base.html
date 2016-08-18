@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waynes Wild Web</title>
+    <script src="https://use.fontawesome.com/bccccab0e8.js"></script>
+    <link rel="stylesheet" href="{% static 'propdesk/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'propdesk/style.css' %}" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'propdesk/jquery-3.1.0.min.js' %}"></script>
+    <script src="{% static 'propdesk/site.js' %}"></script>
+</head>
+<body>
+{% include 'propdesk/nav.html' %}
+
+
+            {% block content %}
+            {% endblock %}
+
+</body>
+</html>

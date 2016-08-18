@@ -1,0 +1,45 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KM Portfolio View</title>
+    <link rel="stylesheet" href="{% static 'propdesk/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'propdesk/style.css' %}" />
+    <script src="{% static 'propdesk/jquery-3.1.0.min.js' %}"></script>
+    <script src="{% static 'propdesk/site.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% include 'propdesk/nav.html' %}
+
+    <div class="container-fluid">
+        <h1> Portfolio: {{portfolio.portfolio_name}} </h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Properties</div>
+                    <div class="panel-body"></div>
+                        <div class="list-group ">
+                        {% for property in portfolio.property_set.all %}
+
+                            <a class="list-group-item listitem" href="{% url 'propdesk:prop' property.id %}"> {{ property.prop_name }} </a>
+
+                        {% endfor %}
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Projects</div>
+                    <div class="panel-body"></div>
+                        <p>Will loop through all projects in all properties under this portfolio displaying several of the OLDEST uncompleted projects</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

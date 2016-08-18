@@ -1,0 +1,14 @@
+{% extends 'propdesk/base.html' %}
+
+{% block content %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">New Project</div>
+            <div class="panel-body propbody">
+                <h1>New project</h1>
+                    <form method="POST" class="project-form">{% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="save btn btn-default">Save</button>
+                    </form>
+            </div>
+        </div>
+{% endblock %}
