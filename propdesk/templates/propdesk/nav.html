@@ -10,13 +10,21 @@
       </button>
         <a class="navbar-brand" href="{% url 'propdesk:index' %}">KMPM Desktop</a>
       </div>
+
       <div class="collapse navbar-collapse" id="navigationbar">
         <ul class="nav navbar-nav">
 
 
           <li><a class="navli" href="{% url 'propdesk:index' %}">Main</a></li>
         </ul>
+          <form class="navbar-form navbar-left" role="search" action="{% url 'propdesk:search' %}" method="get">
+          <div class="form-group">
+              <input class="form-control" placeholder="Search Properties" type="text" name="q">
+              <input class="btn btn-default" type="submit" value="Search">
+          </div>
+        </form>
       </div>
+
       <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
